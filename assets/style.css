@@ -1,0 +1,221 @@
+/* ===== Frutiger Aero · Inventario Aqua ===== */
+:root{
+  --cielo-1:#3fb8f5; --cielo-2:#8ddcff; --cielo-3:#e2f9ff;
+  --aqua:#12a8e6; --aqua-osc:#0877b8;
+  --lima:#7ed321; --lima-osc:#3f9b0b;
+  --naranja:#ffa51f; --violeta:#9a6cf0;
+  --rojo:#ee4b4b;
+  --tinta:#0b3a57; --tinta-suave:#3d6781;
+  --vidrio:rgba(255,255,255,.5);
+  --borde:rgba(255,255,255,.85);
+  --sombra:0 12px 34px rgba(0,110,170,.28);
+  --fuente:"Frutiger","Nunito Sans","Segoe UI","Trebuchet MS",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; min-height:100vh; font-family:var(--fuente); color:var(--tinta);
+  font-size:16px; line-height:1.5;
+  background:linear-gradient(180deg,#2aa9f0 0%,var(--cielo-2) 38%,var(--cielo-3) 62%,#c9f2a6 100%) fixed;
+}
+:focus-visible{outline:3px solid #fff; outline-offset:2px; box-shadow:0 0 0 6px rgba(18,168,230,.7)}
+
+/* ---------- Escena de fondo ---------- */
+.escena{position:fixed; inset:0; overflow:hidden; pointer-events:none; z-index:0}
+.sol{
+  position:absolute; top:-18vmax; left:-10vmax; width:60vmax; height:60vmax; border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.95) 0%,rgba(255,255,255,.45) 25%,rgba(255,255,255,0) 62%);
+}
+.colina{position:absolute; left:-10%; width:120%; border-radius:50% 50% 0 0 / 100% 100% 0 0}
+.c1{bottom:-12vh; height:34vh; background:linear-gradient(180deg,#9be35a,#4fb81d); opacity:.9}
+.c2{bottom:-16vh; height:30vh; left:20%; width:100%; background:linear-gradient(180deg,#b9f27a,#6fcf2e); opacity:.85}
+.burbuja{
+  position:absolute; border-radius:50%;
+  background:
+    radial-gradient(circle at 30% 28%,rgba(255,255,255,.95) 0 9%,rgba(255,255,255,0) 22%),
+    radial-gradient(circle at 70% 78%,rgba(255,255,255,.55) 0 6%,rgba(255,255,255,0) 18%),
+    radial-gradient(circle at 50% 50%,rgba(255,255,255,.04) 55%,rgba(120,220,255,.45) 100%);
+  border:1.5px solid rgba(255,255,255,.7);
+  box-shadow:inset 0 0 18px rgba(255,255,255,.55),0 6px 20px rgba(0,120,190,.18);
+  animation:flotar 9s ease-in-out infinite;
+}
+.b1{width:120px;height:120px;left:6%;top:18%}
+.b2{width:70px;height:70px;left:88%;top:12%;animation-delay:-3s}
+.b3{width:190px;height:190px;left:80%;top:52%;animation-delay:-5s}
+.b4{width:54px;height:54px;left:14%;top:64%;animation-delay:-2s}
+.b5{width:90px;height:90px;left:46%;top:84%;animation-delay:-6s}
+.b6{width:36px;height:36px;left:60%;top:8%;animation-delay:-4s}
+@keyframes flotar{0%,100%{transform:translateY(0)}50%{transform:translateY(-22px)}}
+
+/* ---------- Estructura ---------- */
+.pagina{position:relative; z-index:1; max-width:1080px; margin:0 auto; padding:28px 18px 70px}
+
+.vidrio{
+  position:relative; border-radius:22px; border:1px solid var(--borde);
+  background:linear-gradient(180deg,rgba(255,255,255,.72),rgba(255,255,255,.38));
+  -webkit-backdrop-filter:blur(14px) saturate(1.4); backdrop-filter:blur(14px) saturate(1.4);
+  box-shadow:inset 0 1px 0 #fff, inset 0 -1px 0 rgba(255,255,255,.4), var(--sombra);
+}
+.vidrio::before{ /* brillo superior típico del Aero */
+  content:""; position:absolute; left:2%; right:2%; top:0; height:42%; border-radius:22px 22px 60% 60% / 22px 22px 18px 18px;
+  background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,0)); pointer-events:none;
+}
+.vidrio > *{position:relative}
+
+/* ---------- Cabecera ---------- */
+.cabecera{display:flex; flex-wrap:wrap; gap:18px; align-items:center; justify-content:space-between; padding:20px 24px}
+.marca-app{display:flex; align-items:center; gap:16px}
+.marca-app h1{margin:0; font-size:clamp(1.7rem,4.2vw,2.5rem); line-height:1.05; font-weight:800; letter-spacing:-.02em;
+  color:#fff; text-shadow:0 2px 0 rgba(8,119,184,.55),0 4px 14px rgba(8,119,184,.45); -webkit-text-stroke:.6px rgba(8,119,184,.5)}
+.marca-app p{margin:4px 0 0; color:var(--tinta-suave); font-weight:600; max-width:44ch}
+.orbe-logo{
+  width:60px;height:60px;flex:none;border-radius:50%;display:grid;place-items:center;position:relative;
+  background:radial-gradient(circle at 50% 120%,#7ef04e 0,#1aa7e8 55%,#0a6fb5 100%);
+  box-shadow:0 8px 18px rgba(0,110,170,.4),inset 0 -6px 12px rgba(0,60,120,.35),inset 0 0 0 2px rgba(255,255,255,.7);
+}
+.orbe-logo::after{content:"";position:absolute;top:5%;left:12%;width:76%;height:46%;border-radius:50%;
+  background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,.05))}
+.orbe-logo svg{position:relative;z-index:1;filter:drop-shadow(0 1px 2px rgba(0,60,100,.5))}
+.orbe-logo.grande{width:92px;height:92px}
+
+/* ---------- Orbes de resumen ---------- */
+.orbes{display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:16px; margin:20px 0}
+.orbe{
+  --c1:#3fc4ff; --c2:#0a79c4;
+  position:relative; overflow:hidden; border-radius:24px; padding:16px 20px 14px; color:#fff;
+  display:flex; flex-direction:column; gap:2px;
+  background:linear-gradient(180deg,var(--c1),var(--c2));
+  border:1px solid rgba(255,255,255,.75);
+  box-shadow:0 10px 24px rgba(0,80,140,.3),inset 0 -8px 16px rgba(0,0,0,.14),inset 0 1px 0 rgba(255,255,255,.8);
+}
+.orbe::before{content:"";position:absolute;left:4%;right:4%;top:0;height:50%;border-radius:24px 24px 70% 70%/24px 24px 30px 30px;
+  background:linear-gradient(180deg,rgba(255,255,255,.65),rgba(255,255,255,.06))}
+.orbe-num{position:relative;font-size:2.3rem;font-weight:800;line-height:1.1;text-shadow:0 2px 6px rgba(0,50,90,.4)}
+.orbe-txt{position:relative;font-weight:700;opacity:.95;text-shadow:0 1px 3px rgba(0,50,90,.4)}
+.o-aqua{--c1:#43d0ff;--c2:#0a82d0}
+.o-lima{--c1:#a6ee4d;--c2:#3f9f0c}
+.o-naranja{--c1:#ffc45a;--c2:#ee7d0a}
+.o-violeta{--c1:#c29cff;--c2:#6b3fd6}
+
+/* ---------- Panel principal ---------- */
+.panel{padding:20px}
+.barra{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:16px}
+.campo-busqueda{flex:1 1 260px; display:flex; align-items:center; gap:8px; color:var(--aqua-osc)}
+input,select{
+  font:inherit; color:var(--tinta); width:100%; padding:11px 14px; border-radius:14px;
+  border:1px solid #9fd6ee; background:linear-gradient(180deg,#f2fbff,#fff);
+  box-shadow:inset 0 2px 5px rgba(0,90,150,.18),0 1px 0 #fff;
+}
+.campo-busqueda input{border-radius:999px}
+select{width:auto; flex:0 1 210px; border-radius:999px; cursor:pointer}
+input::placeholder{color:#7aa4bb}
+
+/* ---------- Botones glossy ---------- */
+.btn{
+  --a:#5ed8ff; --b:#13a3e6; --c:#0a86d4; --d:#37c3f6; --borde-b:#0a74b8;
+  display:inline-flex; align-items:center; justify-content:center; gap:8px; cursor:pointer; text-decoration:none;
+  font:inherit; font-weight:800; color:#fff; padding:11px 22px; border-radius:999px;
+  border:1px solid var(--borde-b);
+  background:linear-gradient(180deg,var(--a) 0%,var(--b) 49%,var(--c) 51%,var(--d) 100%);
+  text-shadow:0 1px 2px rgba(0,50,90,.55);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.85),inset 0 -2px 4px rgba(255,255,255,.25),0 5px 12px rgba(0,90,150,.35);
+  transition:transform .15s ease,filter .15s ease,box-shadow .15s ease;
+}
+.btn:hover{filter:brightness(1.08) saturate(1.1); transform:translateY(-1px)}
+.btn:active{transform:translateY(1px); box-shadow:inset 0 2px 6px rgba(0,50,90,.4)}
+.btn-verde{--a:#b8f26a;--b:#65c71e;--c:#3f9f0c;--d:#78d62f;--borde-b:#37890a}
+.btn-rojo{--a:#ff9a9a;--b:#ee4b4b;--c:#d02a2a;--d:#f36666;--borde-b:#b32020}
+.btn-gris{--a:#fff;--b:#e6f3fa;--c:#cfe4f0;--d:#e9f5fb;--borde-b:#a6c9dc;color:var(--tinta);text-shadow:0 1px 0 #fff}
+
+/* ---------- Tabla ---------- */
+.tabla-envoltura{border-radius:18px; overflow:hidden; border:1px solid rgba(255,255,255,.9); box-shadow:0 4px 14px rgba(0,90,150,.15)}
+.tabla{width:100%; border-collapse:collapse; background:rgba(255,255,255,.78)}
+.tabla th{
+  padding:12px 16px; text-align:left; font-weight:800; color:#fff; text-shadow:0 1px 2px rgba(0,60,100,.5);
+  background:linear-gradient(180deg,#58cdfb 0%,#1ca6e8 50%,#0d8bd8 51%,#3ebdf3 100%);
+}
+.tabla td{padding:13px 16px; border-top:1px solid rgba(18,168,230,.18); vertical-align:middle}
+.tabla tbody tr:nth-child(even){background:rgba(210,243,255,.55)}
+.tabla tbody tr:hover{background:rgba(190,240,150,.35)}
+.c{text-align:center !important}
+.nombre{font-weight:800; font-size:1.04rem}
+.chip{
+  --h:200; display:inline-block; padding:4px 14px; border-radius:999px; font-weight:800; font-size:.9rem;
+  color:hsl(var(--h) 70% 22%);
+  background:linear-gradient(180deg,hsl(var(--h) 95% 90%),hsl(var(--h) 85% 76%));
+  border:1px solid hsl(var(--h) 70% 60%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9);
+}
+.unidades{
+  display:inline-grid; place-items:center; min-width:48px; padding:3px 12px; border-radius:999px; font-weight:800; color:#fff;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 2px 6px rgba(0,60,90,.3); text-shadow:0 1px 2px rgba(0,0,0,.35);
+}
+.u-ok{background:linear-gradient(180deg,#a6ee4d,#3f9f0c)}
+.u-bajo{background:linear-gradient(180deg,#ffc45a,#e9780a)}
+.u-agotado{background:linear-gradient(180deg,#ff8f8f,#d02a2a)}
+.ubicacion{display:inline-flex; align-items:center; gap:6px; font-weight:600; color:var(--tinta-suave)}
+.ubicacion svg{color:var(--aqua); flex:none}
+.acciones{display:inline-flex; gap:8px}
+.icono{
+  width:38px;height:38px;border-radius:50%;display:grid;place-items:center;cursor:pointer;color:#fff;
+  border:1px solid rgba(255,255,255,.8);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 4px 10px rgba(0,70,120,.3);
+  transition:transform .15s ease,filter .15s ease;
+}
+.icono:hover{transform:scale(1.1); filter:brightness(1.1)}
+.icono-aqua{background:radial-gradient(circle at 50% 0,#8fe6ff,#12a8e6 60%,#0877b8)}
+.icono-rojo{background:radial-gradient(circle at 50% 0,#ffb1b1,#ee4b4b 60%,#b82020)}
+
+.pie-tabla{display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between; margin-top:16px}
+.conteo{font-weight:700; color:var(--tinta-suave)}
+.paginas{display:flex; gap:6px; flex-wrap:wrap}
+.pag{
+  min-width:38px; height:38px; padding:0 10px; display:grid; place-items:center; border-radius:999px; text-decoration:none;
+  font-weight:800; color:var(--aqua-osc); background:linear-gradient(180deg,#fff,#d8f1fb); border:1px solid #9fd6ee;
+  box-shadow:inset 0 1px 0 #fff,0 2px 6px rgba(0,90,150,.2);
+}
+.pag:hover{filter:brightness(1.05)}
+.pag.activa{color:#fff;background:linear-gradient(180deg,#5ed8ff,#0d8bd8);border-color:#0a74b8;text-shadow:0 1px 2px rgba(0,50,90,.5)}
+
+/* ---------- Vacío y avisos ---------- */
+.vacio{text-align:center; padding:34px 12px 26px; display:flex; flex-direction:column; align-items:center; gap:6px}
+.vacio h2{margin:12px 0 0; font-size:1.5rem}
+.vacio p{margin:0 0 12px; color:var(--tinta-suave); font-weight:600}
+.aviso{margin-top:16px; padding:14px 48px 14px 20px; font-weight:800; border-radius:18px}
+.aviso-ok{color:#1e5a05; box-shadow:inset 0 1px 0 #fff,0 10px 28px rgba(80,170,20,.35); background:linear-gradient(180deg,rgba(220,255,190,.9),rgba(170,235,110,.6))}
+.aviso-error{color:#7a1111; box-shadow:inset 0 1px 0 #fff,0 10px 28px rgba(220,60,60,.3); background:linear-gradient(180deg,rgba(255,225,225,.92),rgba(255,170,170,.6))}
+.aviso-cerrar{position:absolute; right:12px; top:50%; transform:translateY(-50%); width:30px;height:30px;border-radius:50%;border:0;cursor:pointer;
+  font-size:1.2rem;line-height:1;color:inherit;background:rgba(255,255,255,.7)}
+
+/* ---------- Ventanas (diálogos) ---------- */
+.ventana{
+  width:min(520px,calc(100vw - 28px)); padding:26px; color:var(--tinta); margin:auto;
+  background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(220,246,255,.82));
+}
+.ventana-chica{width:min(440px,calc(100vw - 28px))}
+.ventana::backdrop{background:radial-gradient(circle at 50% 30%,rgba(120,220,255,.55),rgba(0,90,150,.55)); backdrop-filter:blur(4px)}
+.ventana h2{margin:0 0 16px; font-size:1.5rem; font-weight:800}
+.ventana p{margin:0 0 18px; color:var(--tinta-suave); font-weight:600}
+.campo{display:block; margin-bottom:14px}
+.campo span{display:block; margin-bottom:5px; font-weight:800; color:var(--aqua-osc)}
+.fila{display:grid; grid-template-columns:1fr 130px; gap:12px}
+.botones{display:flex; justify-content:flex-end; flex-wrap:wrap; gap:10px; margin-top:8px}
+dialog[open]{animation:abrir .25s ease-out}
+@keyframes abrir{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
+
+/* ---------- Móvil: la tabla pasa a tarjetas ---------- */
+@media (max-width:720px){
+  .cabecera{padding:18px}
+  .tabla thead{position:absolute;left:-9999px}
+  .tabla,.tabla tbody,.tabla tr,.tabla td{display:block;width:100%}
+  .tabla tr{padding:10px 6px;border-top:1px solid rgba(18,168,230,.25)}
+  .tabla td{border:0;padding:6px 14px;display:flex;justify-content:space-between;align-items:center;gap:12px;text-align:right}
+  .tabla td::before{content:attr(data-label);font-weight:800;color:var(--aqua-osc);text-align:left}
+  .c{text-align:right !important}
+  .fila{grid-template-columns:1fr}
+  select{flex:1 1 100%}
+}
+@media (prefers-reduced-motion:reduce){
+  .burbuja,dialog[open]{animation:none}
+  .btn,.icono{transition:none}
+}
